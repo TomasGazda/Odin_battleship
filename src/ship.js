@@ -1,11 +1,14 @@
 class ship{
     #length;
     #sunk;
-    #hit;
+    #hit = new Array();
+    
+
     constructor (length){
         this.#length = length;
         this.#sunk = false;
-        this.#hit = [0,0,0]
+        this.setuphitarray();
+        
     }
 
     getlength(){
@@ -19,10 +22,22 @@ class ship{
     }
     
     sethit(position){
-        this.#hit[position] = 1;
-        
-        if (!this.#hit.some((element)=>{ element == 0})){
-            this.#sunk = true;
+        if (position<this.#length || this.#sunk == true){
+            this.#hit[position] = 1;
+
+            const checkhits = (field) =>{
+                return field == 0
+            }
+            
+            if (!this.#hit.some(checkhits)){
+                this.#sunk = true;
+            }
+        }
+    }
+    setuphitarray(){
+        for (let index = 0; index < this.#length; index++) {
+            this.#hit[index]=0;
+            
         }
     }
 
