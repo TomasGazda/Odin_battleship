@@ -58,19 +58,35 @@ test('Test if gameboard created properly', () => {
 
     test('Test fire hits water',()=>{
         
-        expect(new_gameboard.incoming_fire([6,8])).toBe(false);
+        expect(new_gameboard.incoming_fire([6,8])).toEqual({'hit':false,'sunk':false,'floating':6});
         expect(new_gameboard.getBoard()).toEqual([[0,0,0,1,0,0,0,0,0],[0,0,0,1,0,0,0,0,0],[0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,'X',0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]);
     })
     test('Test fire hits ship',()=>{
         
-        expect(new_gameboard.incoming_fire([1,4])).toBe(true);
+        expect(new_gameboard.incoming_fire([1,4])).toEqual({'hit':true,'sunk':false,'floating':6});
         expect(new_gameboard.getBoard()).toEqual([[0,0,0,'X',0,0,0,0,0],[0,0,0,1,0,0,0,0,0],[0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]);
     })
-    test('Test out of gameboard',()=>{
+    test('Test fire out of gameboard',()=>{
         
         expect(()=>new_gameboard.incoming_fire([10,10])).toThrow();
         expect(new_gameboard.getBoard()).toEqual([[0,0,0,1,0,0,0,0,0],[0,0,0,1,0,0,0,0,0],[0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]);
     })
+    test('Test hit ship is recording the hit',()=>{
+        
+        expect(new_gameboard.incoming_fire([1,4])).toEqual({'hit':true,'sunk':false,'floating':6});
+        expect(new_ship.gethit()).toEqual([1,0,0]);
+        
+    })
+    
+    test('Test sunking ship is recording if it sunk',()=>{
+        
+        expect(new_gameboard.incoming_fire([1,4])).toEqual({'hit':true,'sunk':false,'floating':6});
+        expect(new_gameboard.incoming_fire([2,4])).toEqual({'hit':true,'sunk':false,'floating':6});
+        expect(new_gameboard.incoming_fire([3,4])).toEqual({'hit':true,'sunk':true,'floating':5});
+        expect(new_ship.getsunk()).toBe(true);
+        
+    })
+
  })
  
 

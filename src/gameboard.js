@@ -40,19 +40,43 @@ class gameboard{
         return this.#ships;
     }
 
+    ship_hit(coordinates){
+        const is_hit = (place) => coordinates[0] == place[0]&& coordinates[1] == place[1];
+
+        for (let ind = 0; ind < this.#ships.length; ind++) {
+            let element_ship = this.#ships[ind];
+            let index = element_ship.position.findIndex(is_hit);
+            if(index>-1){
+                element_ship.ship_object.sethit(index);
+                if(element_ship.ship_object.getsunk() == true){
+                    this.#floating_ships-=1;
+                    return true;
+                }
+
+                break;
+            } 
+        
+        }
+        return false;
+    }
+
+
+
     incoming_fire(coordinates){
         if( coordinates[0]-1>8||coordinates[1]-1>8){
             throw 'Cannot fire out for gameboard!'
         }
         if(this.#board[coordinates[0]-1][coordinates[1]-1] == 1){
             this.#board[coordinates[0]-1][coordinates[1]-1] = 'X';
-
-            return true;
+            let sunk = this.ship_hit([coordinates[0]-1,coordinates[1]-1]);
+            return {'hit':true,'sunk':sunk,'floating':this.#floating_ships};
 
         }
         this.#board[coordinates[0]-1][coordinates[1]-1] ='X';
-        return false;
+        return {'hit':false,'sunk':false,'floating':this.#floating_ships};
     }
+
+    
 
 
 }
