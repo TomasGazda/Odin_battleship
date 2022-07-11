@@ -1,0 +1,97 @@
+
+
+body{
+    font-family: "Source Sans Pro", "Arial", sans-serif;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-rows: 1fr 17fr;
+    grid-template-columns: 1fr;
+    width: 100vw;
+   height: 100vh;
+}
+.menu{
+    grid-row: 1/2;
+    background-color: rgba(190, 183, 183, 0.5);
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    padding-left: 10px;
+
+}
+.container{
+    grid-row: 2/3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.name{
+    height: 90%;
+    font-size: 2em;
+    text-transform: capitalize;  
+}
+.game{
+    padding-right: 10px;
+}
+.game button{
+    border: 0;
+    background-color: transparent;
+    height: 90%;
+    font-size: 1.2em;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.game button:hover{
+    border-radius: 10px;
+    background-color: rgb(182, 164, 164);
+
+}
+
+.setup{
+    background-color: rgba(190, 183, 183, 0.5);
+    width: 20%;
+    height: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 15px;
+    gap:5%;
+    box-shadow: 5px 10px 18px #888888;
+
+}
+.setup button {
+    padding: 12px;
+    border-radius: 10px;
+    border-style: none;
+    font-size: 1.2em;
+    box-shadow: 2px 5px 9px #888888;
+    
+
+}
+
+.setup button:active {
+    
+    box-shadow: 1px 4px 6px #888888;
+
+}
+
+#players input{
+    border-radius: 15px;
+    padding-left: 5px;
+
+}
+
+#players button{
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    
+}
+
+#players{
+    display: none;
+    gap:0;
+}

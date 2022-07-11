@@ -7,7 +7,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     mode: 'development',
     entry: {
-     
       index: './src/index.js',
     },
      devtool: 'inline-source-map',
@@ -24,6 +23,7 @@ module.exports = {
     output: {
       filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist'),
+      assetModuleFilename: 'src/assets/[name].[ext]',
       clean:true,
       
     },
@@ -31,7 +31,6 @@ module.exports = {
         rules: [
           {
             test: /\.css$/i,
-            
             use: [MiniCssExtractPlugin.loader, 'css-loader'],
           },
           {
